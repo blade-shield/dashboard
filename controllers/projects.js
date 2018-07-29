@@ -39,6 +39,25 @@ exports.getProjectById = wrap(async (req, res) => {
 })
 
 /**
+ * GET /projects/:id/dashboard
+ */
+exports.getOverview = wrap(async (req, res) => {
+  try {
+    const project = await Project.findById(req.params['id'])
+
+    res.render('projects/dashboard', {
+      title: 'Project',
+      project
+    })
+  } catch (error) {
+    req.flash('errors', {
+      msg: 'Project not found'
+    })
+    res.redirect('/projects')
+  }
+})
+
+/**
  * GET /projects/new
  */
 exports.newProject = (req, res) => {

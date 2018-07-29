@@ -281,8 +281,9 @@ app.get('/auth/pinterest/callback', passport.authorize('pinterest', {
 app.get('/projects', passportConfig.isAuthenticated, projectController.getProjects)
 app.get('/projects/new', passportConfig.isAuthenticated, projectController.newProject)
 app.get('/projects/:id', passportConfig.isAuthenticated, projectController.getProjectById)
-app.post('/projects/new', passportConfig.isAuthenticated, projectController.createProject)
+app.get('/projects/:id/dashboard', passportConfig.isAuthenticated, projectController.getOverview)
 app.get('/projects/:id/edit', passportConfig.isAuthenticated, projectController.editProject)
+app.post('/projects/new', passportConfig.isAuthenticated, projectController.createProject)
 app.put('/projects/:id', passportConfig.isAuthenticated, projectController.updateProject)
 /**
  * Error Handler.
