@@ -34,7 +34,7 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
-
+const projectController = require('./controllers/projects')
 /**
  * API keys and Passport configuration.
  */
@@ -62,7 +62,9 @@ app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.use(expressStatusMonitor());
+app.use(expressStatusMonitor({
+  title: 'BladeShield Status'
+}));
 app.use(compression());
 app.use(sass({
   src: path.join(__dirname, 'public'),
@@ -221,6 +223,12 @@ app.get('/auth/pinterest/callback', passport.authorize('pinterest', { failureRed
   res.redirect('/api/pinterest');
 });
 
+/**
+ * Project routes
+ */
+app.get('/projects', projectController.getProjects)
+app.get('/projects/new', projectController.newProject)
+app.post('/projects/new', projectController.createProject)
 /**
  * Error Handler.
  */
