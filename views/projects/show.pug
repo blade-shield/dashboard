@@ -1,5 +1,38 @@
 extends ../layout
 
 block content
-  .pb-2.mt-2.mb-4.border-bottom
-    h3 Show Project # TODO: Need to real project name
+  .pb-2.mt-2
+    h3 Project :&nbsp;
+      span= project.name
+      small
+        a.btn.btn-link.btn-sm.float-right(href='/projects/' + project._id + '/edit') Edit
+
+  ul.nav.nav-pills.mb-4
+    li.nav-item
+      a.nav-link.active(href='/projects/' + project._id) Issues
+    li.nav-item
+      a.nav-link(href='/projects/' + project._id + '/dashboard') Overview
+
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th(scope='col') Issue
+        th.text-center(scope='col') Events
+        th.text-center(scope='col') Users
+        th.text-center(scope='col') Asignee
+    tbody
+      tr
+        td
+          div
+            div
+              a(href='#') Error
+              | &nbsp; https://partner.tabling.co.kr/static/js/vendor.390ff7f6d7ed08f54a3b.js
+            div undefined is not an object (evaluating 'this.$refs.calendar.$el')
+            div 14 hours ago — 4 days old javascript
+
+        td.text-center
+          strong 1
+        td.text-center
+          strong 1
+        td.text-center
+          strong account
