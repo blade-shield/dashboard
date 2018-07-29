@@ -3,15 +3,52 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
     h3 Update Project
-
-  form(method='POST')
+  form(method='POST', action='/projects/' + project._id + '?_method=PUT')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='name') Name
       .col-md-8
-        input.form-control(type='text', name='name' id='name')
+        input.form-control(type='text', name='name' id='name' value=project.name autofocus)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='type') Type
+      .col-md-8(style='display: flex; aligne-items: center;')
+        each t in types
+          .form-check.form-check-inline
+            input.form-check-input(
+              type='radio',
+              name='type',
+              id='type-' + t,
+              value=t
+              checked=t === project.type
+            )
+            | &nbsp;
+            label.form-check-label(for='type-' + t)= t
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='owner') Owner
+      .col-md-8
+        input.form-control(type='text', name='owner' id='owner' value=project.owner.profile.name)
+    hr
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='slack-is-enabled') Integration with Slack
+      .col-md-8(style='display: flex; aligne-items: center;')
+        .form-check.form-check-inline
+          input.form-check-input(type='checkbox', name='slack[isEnabled]' id='slack-is-enabled' value=project.slack.isEnabled)
+          label.form-check-label(for='slack-is-enabled') Enable
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='slack-username') Slack Username
+      .col-md-8
+        input.form-control(type='text', name='slack[username]' id='slack-username')
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='slack-webhook') Slack Webhook URL
+      .col-md-8
+        input.form-control(type='text', name='slack[webhook]' id='slack-webhook')
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='slack-channel') Slack Channel
+      .col-md-8
+        input.form-control(type='text', name='slack[channel]' id='slack-channel')
+    hr
     .form-group
       .offset-md-2.col-md-8.p-1
-        button.btn.btn-primary(type='submit')
+        button.btn.btn-success(type='submit')
           i.far.fa-check.fa-sm
           | Update
