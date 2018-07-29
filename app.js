@@ -19,6 +19,7 @@ const expressValidator = require('express-validator')
 const expressStatusMonitor = require('express-status-monitor')
 const sass = require('node-sass-middleware')
 const multer = require('multer')
+const methodOverride = require('method-override')
 
 const upload = multer({
   dest: path.join(__dirname, 'uploads')
@@ -81,6 +82,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
+app.use(methodOverride('_method'))
 app.use(expressValidator())
 app.use(session({
   resave: true,
@@ -278,7 +280,10 @@ app.get('/auth/pinterest/callback', passport.authorize('pinterest', {
  */
 app.get('/projects', passportConfig.isAuthenticated, projectController.getProjects)
 app.get('/projects/new', passportConfig.isAuthenticated, projectController.newProject)
+app.get('/projects/:id', passportConfig.isAuthenticated, projectController.getProjectById)
 app.post('/projects/new', passportConfig.isAuthenticated, projectController.createProject)
+app.get('/projects/:id/edit', passportConfig.isAuthenticated, projectController.editProject)
+app.put('/projects/:id', passportConfig.isAuthenticated, projectController.updateProject)
 /**
  * Error Handler.
  */
