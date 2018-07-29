@@ -1,12 +1,12 @@
 {
-  "name": "hackathon-starter",
-  "version": "5.1.1",
-  "description": "A boilerplate for Node.js web applications",
+  "name": "bladeshield-dashboard",
+  "version": "1.0.0.alpha1",
+  "description": "A dashboard for bladeshield error tracker",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/changjoo-park/bladeshield-dashboard.git"
   },
-  "author": "Sahat Yalkabov",
+  "author": "ChangJoo Park",
   "license": "MIT",
   "scripts": {
     "postinstall": "npm rebuild node-sass",
