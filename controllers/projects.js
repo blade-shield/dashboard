@@ -36,7 +36,7 @@ exports.createProject = (req, res) => {
   console.log(req.body)
   req.flash('success', {
     msg: 'Project has been created successfully!'
-  });
+  })
   res.redirect('/projects')
 }
 
@@ -58,6 +58,6 @@ exports.updateProject = (req, res) => {
   console.log(req.body)
   req.flash('success', {
     msg: 'Project has been created successfully!'
-  });
+  })
   res.redirect('/projects')
 }
