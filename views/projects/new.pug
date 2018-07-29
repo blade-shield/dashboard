@@ -8,15 +8,21 @@ block content
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='name') Name
       .col-md-8
-        input.form-control(type='text', name='name', id='name')
+        input.form-control(type='text', name='name', id='name', minLength='5', required)
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='type') Type
       .col-md-8(style='display: flex; aligne-items: center;')
         each t in types
           .form-check.form-check-inline
-            input.form-check-input(type='radio', name='inlineRadioOptions', id=t, value=t)
+            input.form-check-input(
+              type='radio',
+              name='type',
+              id='type-' + t,
+              value=t
+              checked=t === 'JavaScript'
+            )
             | &nbsp;
-            label.form-check-label(for=t)= t
+            label.form-check-label(for='type-' + t)= t
     .form-group
       .offset-md-2.col-md-8.p-1
         button.btn.btn-primary(type='submit')
