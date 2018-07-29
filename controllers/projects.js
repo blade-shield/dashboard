@@ -1,12 +1,21 @@
-// const Project = require('../models/Project')
+const Project = require('../models/Project')
 
 /**
  * GET /projects
  */
 exports.getProjects = (req, res) => {
-  res.render('projects/index', {
-    title: 'Projects'
+  console.log(req.user)
+
+  Project.find({
+    users: req.user._id
   })
+    .then((projects) => {
+      const attributes = {
+        title: 'Projects',
+        projects
+      }
+      res.render('projects/index', attributes)
+    })
 }
 
 /**
