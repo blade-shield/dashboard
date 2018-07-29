@@ -8,7 +8,8 @@ block content
   div
   //- Project Listing
   each project in projects
-    li= project.title
+    li
+      a(href="/projects/"+project._id)= project.name
 
   //- No Projects
   case projects.length
