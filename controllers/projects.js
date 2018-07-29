@@ -1,5 +1,5 @@
 const Project = require('../models/Project')
-
+const projectTypes = require('../config/project-types')
 /**
  * GET /projects
  */
@@ -32,7 +32,8 @@ exports.getProjectById = (req, res) => {
  */
 exports.newProject = (req, res) => {
   res.render('projects/new', {
-    title: 'Project: New'
+    title: 'Project: New',
+    types: projectTypes
   })
 }
 
