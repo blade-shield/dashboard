@@ -20,7 +20,7 @@ const expressStatusMonitor = require('express-status-monitor')
 const sass = require('node-sass-middleware')
 const multer = require('multer')
 const methodOverride = require('method-override')
-
+const projectMiddleware = require('./middlewares/project')
 const upload = multer({
   dest: path.join(__dirname, 'uploads')
 })
@@ -290,9 +290,9 @@ app.put('/projects/:id', passportConfig.isAuthenticated, projectController.updat
 /**
  * Project / Issue routes
  */
-app.get('/projects/:projectId/issues/new', passportConfig.isAuthenticated, issueController.newIssue)
-app.get('/projects/:projectId/issues/:issueId', passportConfig.isAuthenticated, issueController.getIssueById)
-app.post('/projects/:projectId/issues', passportConfig.isAuthenticated, issueController.createIssue)
+app.get('/projects/:projectId/issues/new', passportConfig.isAuthenticated, projectMiddleware.loadProject, issueController.newIssue)
+app.get('/projects/:projectId/issues/:issueId', passportConfig.isAuthenticated, projectMiddleware.loadProject, issueController.getIssueById)
+app.post('/projects/:projectId/issues', passportConfig.isAuthenticated, projectMiddleware.loadProject, issueController.createIssue)
 
 /**
  * Error Handler.
