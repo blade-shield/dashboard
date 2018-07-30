@@ -28,7 +28,7 @@ block content
             td
               div
                 div
-                  a(href='#')= issue.title
+                  a(href='/projects/' + project._id + '/issues/' + issue._id)= issue.title
                   | &nbsp;
                   span= issue.url
                 div= issue.message
