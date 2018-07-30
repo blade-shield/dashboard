@@ -1,0 +1,17 @@
+### REPORT ERROR
+POST http://localhost:8080/report/5b5ed5bc32c0fc3df1d1a8b2 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "ReferenceError",
+  "message": "e is not defined",
+  "source": "anonymous",
+  "lineno": 1,
+  "colno": 15,
+  "stack": "ReferenceError: e is not defined \nat <anonymous>:1:15 \n(anonymous) @ VM101:1",
+  "user": {
+    "name": "ChangJoo Park",
+    "email": "pcjpcj2@gmail.com"
+  }
+}
