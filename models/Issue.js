@@ -9,7 +9,7 @@ const issueSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  url: {
+  source: {
     type: String,
     required: true
   },
