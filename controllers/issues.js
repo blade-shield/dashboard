@@ -1,12 +1,29 @@
 const Project = require('../models/Project')
 const Issue = require('../models/Issue')
+const Event = require('../models/Event')
 const wrap = require('express-async-wrap')
 
 exports.getIssueById = wrap(async (req, res) => {
-  const project = await Project.findById(req.params['projectId'])
+  const {
+    project
+  } = res.locals
+  const issue = await Issue
+    .findById(req.params['issueId'])
+    .populate('events', '_id', null, {
+      sort: {
+        'created_at': -1
+      }
+    })
+  let event = {}
+
+  if (issue.events.length > 0) {
+    event = await Event.findById(issue.events[0])
+  }
 
   res.render('projects/issues/show', {
-    project
+    project,
+    issue,
+    event
   })
 })
 
