@@ -24,11 +24,12 @@ exports.getProjects = (req, res) => {
  */
 exports.getProjectById = wrap(async (req, res) => {
   try {
-    const project = await Project.findById(req.params['id'])
+    const project = await Project.findById(req.params['id']).populate('issues')
 
     res.render('projects/show', {
       title: 'Project',
-      project
+      project,
+      issues: project.issues || []
     })
   } catch (error) {
     req.flash('errors', {
