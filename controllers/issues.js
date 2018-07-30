@@ -15,7 +15,6 @@ exports.getIssueById = wrap(async (req, res) => {
       }
     })
   let event = {}
-
   if (issue.events.length > 0) {
     event = await Event.findById(issue.events[0])
   }
@@ -43,14 +42,14 @@ exports.createIssue = wrap(async (req, res) => {
   console.log('res.locals => ', project)
   const {
     title,
-    url,
+    source,
     message,
     isResolved = false
   } = req.body
 
   const newIssue = await new Issue()
   newIssue.title = title
-  newIssue.url = url
+  newIssue.source = source
   newIssue.isResolved = isResolved
   newIssue.message = message
   newIssue.project = project._id
