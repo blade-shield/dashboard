@@ -4,15 +4,22 @@ block content
   .pb-2.mt-2
     h3 Project :&nbsp;
       span= project.name
-
   div
-    h1 Issue
+    h1 New Issue
   form(method='POST', action='/projects/'+ project._id + '/issues')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='title') Title
       .col-md-8
         input.form-control(type='text', name='title', id='title', required)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='url') URL
+      .col-md-8
+        input.form-control(type='text', name='url', id='url', required)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='message') Message
+      .col-md-8
+        input.form-control(type='text', name='message', id='message', required)
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='resolved') Resolved
       .col-md-8
