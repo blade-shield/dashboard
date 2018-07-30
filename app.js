@@ -40,6 +40,7 @@ const userController = require('./controllers/user')
 const apiController = require('./controllers/api')
 const contactController = require('./controllers/contact')
 const projectController = require('./controllers/projects')
+const issueController = require('./controllers/issues')
 /**
  * API keys and Passport configuration.
  */
@@ -285,6 +286,14 @@ app.get('/projects/:id/dashboard', passportConfig.isAuthenticated, projectContro
 app.get('/projects/:id/edit', passportConfig.isAuthenticated, projectController.editProject)
 app.post('/projects/new', passportConfig.isAuthenticated, projectController.createProject)
 app.put('/projects/:id', passportConfig.isAuthenticated, projectController.updateProject)
+
+/**
+ * Project / Issue routes
+ */
+app.get('/projects/:projectId/issues/new', passportConfig.isAuthenticated, issueController.newIssue)
+app.get('/projects/:projectId/issues/:issueId', passportConfig.isAuthenticated, issueController.getIssueById)
+app.post('/projects/:projectId/issues', passportConfig.isAuthenticated, issueController.createIssue)
+
 /**
  * Error Handler.
  */
