@@ -41,6 +41,7 @@ const apiController = require('./controllers/api')
 const contactController = require('./controllers/contact')
 const projectController = require('./controllers/projects')
 const issueController = require('./controllers/issues')
+const reportController = require('./controllers/report')
 /**
  * API keys and Passport configuration.
  */
@@ -101,7 +102,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
+  if (req.path === '/api/upload' ||
+    req.path === '/report') {
     next()
   } else {
     lusca.csrf()(req, res, next)
@@ -294,6 +296,10 @@ app.get('/projects/:projectId/issues/new', passportConfig.isAuthenticated, proje
 app.get('/projects/:projectId/issues/:issueId', passportConfig.isAuthenticated, projectMiddleware.loadProject, issueController.getIssueById)
 app.post('/projects/:projectId/issues', passportConfig.isAuthenticated, projectMiddleware.loadProject, issueController.createIssue)
 
+/**
+ * Report Event
+ */
+app.post('/report', reportController.create)
 /**
  * Error Handler.
  */
