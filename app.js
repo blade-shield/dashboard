@@ -103,7 +103,7 @@ app.use(passport.session())
 app.use(flash())
 app.use((req, res, next) => {
   if (req.path === '/api/upload' ||
-    req.path === '/report') {
+    req.path.includes('/report')) {
     next()
   } else {
     lusca.csrf()(req, res, next)
@@ -299,7 +299,7 @@ app.post('/projects/:projectId/issues', passportConfig.isAuthenticated, projectM
 /**
  * Report Event
  */
-app.post('/report', reportController.create)
+app.post('/report/:projectId', reportController.create)
 /**
  * Error Handler.
  */
