@@ -1,0 +1,34 @@
+extends ../../layout
+
+block content
+  .pb-2.mt-2
+    h3 Project :&nbsp;
+      span= project.name
+
+  div
+    h1 Issue
+  form(method='POST', action='/projects/'+ project._id + '/issues')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='title') Title
+      .col-md-8
+        input.form-control(type='text', name='title', id='title', required)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='resolved') Resolved
+      .col-md-8
+        input.form-checkbox(type='checkbox', name='resolved', id='resolved')
+        label(for="resolved") &nbsp; isResolved
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='project') Project
+      .col-md-8
+        input.form-control(type='text', name='project', id='project' disabled value=project._id)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='assigned') Assigned
+      .col-md-8
+        input.form-control(type='text', name='assigned', id='assigned')
+
+    .form-group
+      .offset-md-2.col-md-8.p-1
+        button.btn.btn-primary(type='submit')
+          i.far.fa-check.fa-sm
+          | Create
