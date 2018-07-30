@@ -30,7 +30,7 @@ block content
                 div
                   a(href='/projects/' + project._id + '/issues/' + issue._id)= issue.title
                   | &nbsp;
-                  span= issue.url
+                  span= issue.source
                 div= issue.message
                 div= issue.createdAt
             td.text-center
