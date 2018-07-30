@@ -6,6 +6,11 @@ block content
       span= project.name
       small
         a.btn.btn-link.btn-sm.float-right(href='/projects/' + project._id + '/edit') Edit
+  ul.nav.nav-pills.mb-4
+    li.nav-item
+      a.nav-link.active(href='/projects/' + project._id) Issues
+    li.nav-item
+      a.nav-link(href='/projects/' + project._id + '/dashboard') Overview
 
   div
     h1 Issue
