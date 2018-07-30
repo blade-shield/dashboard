@@ -5,6 +5,14 @@ const issueSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  message: {
+    type: String,
+    required: true
+  },
+  url: {
+    type: String,
+    required: true
+  },
   resolved: {
     type: Boolean,
     default: false
@@ -16,7 +24,11 @@ const issueSchema = new mongoose.Schema({
   assigned: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  events: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Event'
+  }]
 }, {
   timestamps: true
 })
