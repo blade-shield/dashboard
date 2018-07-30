@@ -13,26 +13,27 @@ block content
     li.nav-item
       a.nav-link(href='/projects/' + project._id + '/dashboard') Overview
 
-  table.table.table-striped.table-hover
-    thead
-      tr
-        th(scope='col') Issue
-        th.text-center(scope='col') Events
-        th.text-center(scope='col') Users
-        th.text-center(scope='col') Asignee
-    tbody
-      tr
-        td
-          div
-            div
-              a(href='#') Error
-              | &nbsp; https://partner.tabling.co.kr/static/js/vendor.390ff7f6d7ed08f54a3b.js
-            div undefined is not an object (evaluating 'this.$refs.calendar.$el')
-            div 14 hours ago — 4 days old javascript
-
-        td.text-center
-          strong 1
-        td.text-center
-          strong 1
-        td.text-center
-          strong account
+  case issues.length
+    when 0: p
+      | There is No Issue&nbsp;
+    default: table.table.table-striped.table-hover
+      thead
+        tr
+          th(scope='col') Issue
+          th.text-center(scope='col') Events
+          th.text-center(scope='col') Asignee
+      tbody
+        each issue in issues
+          tr
+            td
+              div
+                div
+                  a(href='#')= issue.title
+                  | &nbsp;
+                  span= issue.url
+                div= issue.message
+                div= issue.createdAt
+            td.text-center
+              strong= issue.events.length || 0
+            td.text-center
+              strong account
