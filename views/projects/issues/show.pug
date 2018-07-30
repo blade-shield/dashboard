@@ -11,6 +11,41 @@ block content
       a.nav-link.active(href='/projects/' + project._id) Issues
     li.nav-item
       a.nav-link(href='/projects/' + project._id + '/dashboard') Overview
-
   div
-    h1 Issue
+    h4= issue.title
+      | &nbsp;
+      small= issue.message
+  ul.nav.nav-tabs.mb-4
+    li.nav-item
+      a.nav-link.active(href='/projects/' + project._id + '/issues/' + issue._id) Issues
+    li.nav-item
+      a.nav-link(href='/projects/' + project._id + '/issues/' + issue._id + '/comments') Comments
+    li.nav-item
+      a.nav-link(href='/projects/' + project._id + '/issues/' + issue._id + '/events') Events
+  //- Event Summary
+  div
+    div= event._id
+    div= event.created_at
+    div Event Navbar
+
+  //- Event Reporter
+  if event.useragent
+    pre= event.useragent
+    div
+      div User Name or Email
+      div Browser
+      div Operating System
+  //- Event Details
+
+  //- Event StackTrace
+  div StackTrace
+    div= event.stack
+  //- Event URI
+  div Stack URI
+    div= event.url
+  //- Event UserAgent
+  if event.useragent
+    div UserAgent
+      div= event.useragent.ua
+  //- Additional Data (depends on Type)
+  div Component
